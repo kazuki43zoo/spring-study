@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="testBean2"
+          name="testBean2Alias1,testBean2Alias2;testBean2Alias3 testBean2Alias4"
+          class="com.github.kazuki43zoo.container.TestBean2"/>
+    <alias name="testBean2" alias="testBean2Alias5"/>
+
+    <bean name="testBean3" class="com.github.kazuki43zoo.container.TestBean3"/>
+
+    <bean class="com.github.kazuki43zoo.container.TestBean3"/>
+    
+</beans>

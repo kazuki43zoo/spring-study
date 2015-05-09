@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="testBean" class="com.github.kazuki43zoo.container.TestBean"/>
+
+    <bean id="testBeanCreatedByStaticMethod"
+          class="com.github.kazuki43zoo.container.StaticTestBeanFactory"
+          factory-method="createTestBean"/>
+
+    <bean id="instanceTestBeanFactory"
+          class="com.github.kazuki43zoo.container.InstanceTestBeanFactory"/>
+
+    <bean id="testBeanCreatedByInstanceMethod"
+          factory-bean="instanceTestBeanFactory"
+          factory-method="createTestBean"/>
+
+    <bean id="testBeanCreatedByFactoryBean"
+          class="com.github.kazuki43zoo.container.TestBeanFactoryBean"/>
+
+
+</beans>

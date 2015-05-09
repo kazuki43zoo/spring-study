@@ -1,6 +1,8 @@
 package com.github.kazuki43zoo.container;
 
-public class TestBean {
+import org.springframework.stereotype.Component;
+
+public class ChildBean {
     public String getMessage() {
         return "Hello World by " + getClass().getSimpleName();
     }

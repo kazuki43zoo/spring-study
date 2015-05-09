@@ -5,8 +5,10 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="testBean" class="com.github.kazuki43zoo.container.TestBean" />
-    
-    <context:component-scan base-package="com.github.kazuki43zoo.container"/>
+    <bean id="testBean" class="com.github.kazuki43zoo.container.TestBean"/>
+
+    <context:component-scan
+            base-package="com.github.kazuki43zoo"
+            name-generator="com.github.kazuki43zoo.container.TrimmingImplAnnotationBeanNameGenerator"/>
 
 </beans>
