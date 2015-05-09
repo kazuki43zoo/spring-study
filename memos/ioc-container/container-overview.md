@@ -3,10 +3,10 @@
 IoCは「Inversion of Control」の略で、DI(dependency injection)と呼ぶこともあります。
 IoC(DI)は、あるオブジェクトが別のオブジェクトとの依存関係を解決するプロセスの一つで、このプロセスを実行する実行環境のことをIoC(DI) Containerと呼びます。
 
-SpringのIoC Containerは、以下のパッケージのコンポーネントで構成されます。
+SpringのIoC Containerは、以下のパッケージ(サブモジュール)のコンポーネントで構成されます。
 
-* `org.springframework.beans`
-* `org.springframework.context`
+* `org.springframework.beans` (spring-beans)
+* `org.springframework.context` (spring-context)
 
 SpringのIoC Containerの構成コンポーネントのうちもっとも重要なインタフェースは以下の２つです。
 
