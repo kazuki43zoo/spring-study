@@ -90,7 +90,7 @@ public class TestBean {
 }
 ```
 
-#### bean定義ファイル
+**bean定義ファイル**
 
 bean定義ファイルと呼ばれるXMLファイルにメタデータを定義し、IoC Container(`ApplicationContext`)を構築する場合は、
 以下のような実装になります。(伝統的な定義方法)
@@ -110,7 +110,7 @@ bean定義ファイルと呼ばれるXMLファイルにメタデータを定義�
 </beans>
 ```
 
-#### コンフィグレーションクラス
+**コンフィグレーションクラス**
 
 アノテーション(`@Configuration`)が付与されたコンフィギュレーションクラスにメタデータを定義し、IoC Container(`ApplicationContext`)を構築する場合は、
 以下のような実装になります。(Spring 3からサポートされたモダンな定義方法)
@@ -132,7 +132,7 @@ public class AppConfig {
 }
 ```
 
-#### アノテーション
+**アノテーション**
 
 アノテーション(`@Component`)を付与してメタデータを定義し、IoC Container(`ApplicationContext`)を構築する場合は、
 以下のような実装になります。(Spring 2.5からサポートされた定義方法)
