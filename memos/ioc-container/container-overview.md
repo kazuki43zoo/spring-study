@@ -29,7 +29,7 @@ SpringのIoC Containerは、`ApplicationContext`インタフェースで表現�
 以下の実装クラスがSpringから提供されています。
 
 
-**[非Web依存]**
+**非Web依存のApplicationContext**
 
 * **`FileSystemXmlApplicationContext`** (\*1)
 * **`ClassPathXmlApplicationContext`** (\*1)
@@ -39,7 +39,7 @@ SpringのIoC Containerは、`ApplicationContext`インタフェースで表現�
 * `GenericXmlApplicationContext`
 * `StaticApplicationContext`
 
-**[Web依存]**
+**Web依存のApplicationContext**
 
 * **`XmlWebApplicationContext`** (\*1)
 * **`AnnotationConfigWebApplicationContext`** (\*2)
