@@ -25,8 +25,8 @@ IoC Containerは、IoC Containerを構築するためのメタデータを読み
 
 
 SpringのIoC Containerは、`ApplicationContext`インタフェースで表現されます。
-`ApplicationContext`は、IoC Containerで管理されているBeanを操作するためのメソッドを提供しており、
-以下の実装クラスがSpringから提供されています。
+`ApplicationContext`は、IoC Containerで管理されているBeanを操作するためのメソッドを提供されています。
+`ApplicationContext`インタフェースの主な実装クラスは以下の通りです。
 
 
 **非Web依存のApplicationContext**
@@ -35,17 +35,12 @@ SpringのIoC Containerは、`ApplicationContext`インタフェースで表現�
 * **`ClassPathXmlApplicationContext`** (\*1)
 * **`AnnotationConfigApplicationContext`** (\*2)
 * `GenericGroovyApplicationContext` (\*3)
-* `GenericApplicationContext`
-* `GenericXmlApplicationContext`
-* `StaticApplicationContext`
 
 **Web依存のApplicationContext**
 
 * **`XmlWebApplicationContext`** (\*1)
 * **`AnnotationConfigWebApplicationContext`** (\*2)
 * `GroovyWebApplicationContext` (\*3)
-* `GenericWebApplicationContext`
-* `StaticWebApplicationContext`
 
 \*1 : bean定義ファイルと呼ばれるXMLファイルからメタデータを読み取ってIoC Containerを構築する実装クラス
 
