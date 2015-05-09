@@ -31,15 +31,15 @@ SpringのIoC Containerは、`ApplicationContext`インタフェースで表現�
 
 **非Web依存のApplicationContext**
 
-* **`FileSystemXmlApplicationContext`** (\*1)
-* **`ClassPathXmlApplicationContext`** (\*1)
-* **`AnnotationConfigApplicationContext`** (\*2)
+* `FileSystemXmlApplicationContext` (\*1)
+* `ClassPathXmlApplicationContext` (\*1)
+* `AnnotationConfigApplicationContext` (\*2)
 * `GenericGroovyApplicationContext` (\*3)
 
 **Web依存のApplicationContext**
 
-* **`XmlWebApplicationContext`** (\*1)
-* **`AnnotationConfigWebApplicationContext`** (\*2)
+* `XmlWebApplicationContext`** (\*1)
+* `AnnotationConfigWebApplicationContext` (\*2)
 * `GroovyWebApplicationContext` (\*3)
 
 \*1 : bean定義ファイルと呼ばれるXMLファイルからメタデータを読み取ってIoC Containerを構築する実装クラス
