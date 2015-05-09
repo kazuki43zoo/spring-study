@@ -4,7 +4,7 @@ import org.springframework.beans.factory.FactoryBean;
 
 public class TestBeanFactoryBean implements FactoryBean<TestBean> {
 
-    public TestBean getObject() throws Exception {
+    public TestBean getObject() {
         return new TestBean();
     }
 
