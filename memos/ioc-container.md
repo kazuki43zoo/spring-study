@@ -60,11 +60,25 @@ SpringのIoC Containerは、`ApplicationContext`インタフェースで表現�
 
 ### Configuration metadata
 
-IoC Containerを構築するためのメタデータは、bean定義ファイル、コンフィグレーションクラス、アノテーションを使って定義することができます。
+IoC Containerを構築するためのメタデータは、
+
+* bean定義ファイル
+* コンフィグレーションクラス
+* アノテーション
+
+を使って定義することができます。
+
+この3つの定義方法は共存することができますが、
+
+* bean定義ファイル + アノテーション
+* コンフィギュレーションクラス + アノテーション
+
+の組み合わせで使うのが一般的です。
 
 メタデータの定義例は以下の通りです。ここでは`TestBean`というクラスをBean定義する最もシンプルな定義例を紹介します。
+なお、Beanのスコープ・優先順位・依存関係の解決などに関するメタデータの定義方法は別途紹介します。
 
-* Bean
+* BeanとしてIoC Containerに登録するクラス
 
 ```java
 package com.github.kazuki43zoo.container;
@@ -90,6 +104,7 @@ bean定義ファイルと呼ばれるXMLファイルにメタデータを定義�
         http://www.springframework.org/schema/beans/spring-beans.xsd
        ">
 
+    <!-- ★ beanを登録するためのタグを使ってbean定義 -->
     <bean id="testBean" class="com.github.kazuki43zoo.container.TestBean" />
 
 </beans>
@@ -106,10 +121,10 @@ package com.github.kazuki43zoo.container;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration // ★
+@Configuration // ★ コンフィギュレーションクラスであることを示すアノテーションを付与
 public class AppConfig {
 
-    @Bean // ★
+    @Bean // ★ Bean定義用のメソッドであることを示すアノテーションを付与
     TestBean testBean() {
         return new TestBean();
     }
@@ -123,7 +138,7 @@ public class AppConfig {
 以下のような実装になります。(Spring 2.5からサポートされた定義方法)
 
 ```java
-@Component // ★
+@Component // ★ 汎用的なコンポーネント(Bean)であることを示すアノテーションを付与
 public class TestBean {
     public void print() {
         System.out.println("Hello World.");
@@ -131,11 +146,9 @@ public class TestBean {
 }
 ```
 
-コンポーネントのスキャン機能を有効にします。
-
 ```java
 @Configuration
-@ComponentScan // ★
+@ComponentScan // ★ コンポーネントのスキャン機能を有効にするためのアノテーションを付与
 public class AppConfig {
     // ...
 }
@@ -144,13 +157,61 @@ public class AppConfig {
 or
 
 ```xml
+<!-- ★ コンポーネントのスキャン機能を有効にするためのタグを追加 -->
 <context:component-scan base-package="com.github.kazuki43zoo.container"/>
 ```
 
 ### Instantiating a container
 
+SpringのIoC Containerの生成は、`ApplicationContext`インタフェースの実装クラスのインスタンスを生成することで実現します。
+
+```java
+// ★ コンフィギュレーションクラスに定義されているメタデータを読み取ってIoC Containerを生成
+ConfigurableApplicationContext context =
+        new AnnotationConfigApplicationContext(AppConfig.class);
+```
+
+```java
+// ★ bean定義ファイルに定義されているメタデータを読み取ってIoC Containerを生成
+ConfigurableApplicationContext context =
+        new ClassPathXmlApplicationContext("applicationContext.xml");
+```
+
+### Shutting down the Spring IoC container
+
+SpringのIoC Containerを使ったアプリケーションを終了する場合は、IoC Containerを停止する必要があります。
+
+> **Note:**
+>
+> WebアプリケーションでIoC Containerを使う場合は、Springが提供している`ContextLoaderListener`(`ServletContextListener`インタフェースの実装クラス)によって停止処理を行ってくれます。
+
+IoC Containerを停止する場合は、`ConfigurableApplicationContext`インタフェースに定義されている`close()`メソッドを呼び出す必要があります。
+`close()`メソッドを呼び出しは直接行うのではなくJVMのシャットダウンフックを使ってください。
+なお、SpringはJVMのシャットダウンフックに`close()`メソッドの呼び出しを登録するためのメソッドとして、
+`ConfigurableApplicationContext`インタフェースに`registerShutdownHook()`メソッドを用意しています。
+
+```java
+ConfigurableApplicationContext context =
+        new AnnotationConfigApplicationContext(AppConfig.class);
+context.registerShutdownHook(); // ★ JVMのシャットダウンフックに停止処理の呼び出しを登録
+// ...
+```
 
 ### Using the container
 
+SpringのIoC Containerに登録したBeanを使う場合は、`ApplicationContext`インタフェースの`T getBean(String, Class<T>)`メソッドを使用します。
+
+> **Note:**
+>
+> Spring MVC(Webアプリケーション用のMVCフレームワーク)やSpring Batch(バッチアプリケーション用のフレームワーク)上でアプリケーションを開発する場合は、`ApplicationContext`のメソッドを直接使用する必要はなく、Dependency Injection(DI)の仕組みを使用して必要なBeanを取得します。
+> エントリーポイントとなるBeanの取得とメソッドの呼び出しは、フレームワーク側の機能で行ってくれます。
+
+```java
+ConfigurableApplicationContext context =
+        new AnnotationConfigApplicationContext(AppConfig.class);
+context.registerShutdownHook();
+TestBean testBean = context.getBean("testBean", TestBean.class); // ★ Beanの取得
+testBean.print(); // ★ 取得したBeanの呼び出し
+```
 
 ## Bean overview

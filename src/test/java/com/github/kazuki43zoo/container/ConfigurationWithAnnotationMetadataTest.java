@@ -12,9 +12,9 @@ public class ConfigurationWithAnnotationMetadataTest {
     public void configure() {
         ConfigurableApplicationContext context =
                 new AnnotationConfigApplicationContext(Config.class);
-        TestBean testBean = context.getBean(TestBean.class);
+        context.registerShutdownHook();
+        TestBean testBean = context.getBean("testBean", TestBean.class);
         testBean.print();
-        context.close();
     }
 
     @Configuration
