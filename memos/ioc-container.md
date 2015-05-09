@@ -90,10 +90,10 @@ public class TestBean {
 }
 ```
 
-**bean定義ファイル**
+**bean定義ファイル(伝統的な定義方法)**
 
 bean定義ファイルと呼ばれるXMLファイルにメタデータを定義してIoC Container(`ApplicationContext`)を構築する場合は、
-以下のような実装になります。(伝統的な定義方法)
+以下のような実装になります。
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -110,10 +110,10 @@ bean定義ファイルと呼ばれるXMLファイルにメタデータを定義�
 </beans>
 ```
 
-**コンフィグレーションクラス**
+**コンフィグレーションクラス(Spring 3からサポートされたモダンな定義方法)**
 
 アノテーション(`@Configuration`)が付与されたコンフィギュレーションクラスにメタデータを定義してIoC Container(`ApplicationContext`)を構築する場合は、
-以下のような実装になります。(Spring 3からサポートされたモダンな定義方法)
+以下のような実装になります。
 
 ```java
 package com.github.kazuki43zoo.container;
@@ -132,10 +132,10 @@ public class AppConfig {
 }
 ```
 
-**アノテーション**
+**アノテーション(Spring 2.5からサポートされた定義方法)**
 
 Beanとして扱うクラス自体にアノテーションを付与することでメタデータを定義してIoC Container(`ApplicationContext`)を構築する場合は、
-以下のような実装になります。(Spring 2.5からサポートされた定義方法)
+以下のような実装になります。
 
 ```java
 @Component // ★ コンポーネント(Bean)であることを示すアノテーションを付与
