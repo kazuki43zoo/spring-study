@@ -1,6 +1,4 @@
-# The IoC Container
-
-## Introduction to the Spring IoC container and beans
+# The IoC Container overview
 
 IoCは「Inversion of Control」の略で、DI(dependency injection)と呼ぶこともあります。
 IoC(DI)は、あるオブジェクトが別のオブジェクトとの依存関係を解決するプロセスの一つで、このプロセスを実行する実行環境のことをIoC(DI) Containerと呼びます。
@@ -25,8 +23,6 @@ SpringのIoC Containerの構成コンポーネントのうちもっとも重要�
 IoC Containerは、IoC Containerを構築するためのメタデータを読み込み、メタデータに基づきコンテナ内で管理するオブジェクトのインスタンス生成やオブジェクト間の依存関係の解決などの処理を行います。
 なお、IoC Containerで管理するオブジェクトは「Bean」と呼びます。
 
-
-## Container overview
 
 SpringのIoC Containerは、`ApplicationContext`インタフェースで表現されます。
 `ApplicationContext`は、IoC Containerで管理されているBeanを操作するためのメソッドを提供しており、
@@ -58,7 +54,7 @@ SpringのIoC Containerは、`ApplicationContext`インタフェースで表現�
 \*3 : Groovyスクリプトからメタデータを読み取ってIoC Containerを構築する実装クラス
 
 
-### Configuration metadata
+## Configuration metadata
 
 IoC Containerを構築するためのメタデータは、
 
@@ -166,7 +162,7 @@ or
 <context:component-scan base-package="com.github.kazuki43zoo.container"/>
 ```
 
-### Instantiating a container
+## Instantiating a container
 
 SpringのIoC Containerの生成は、`ApplicationContext`インタフェースの実装クラスのインスタンスを生成することで実現します。
 
@@ -182,7 +178,7 @@ ConfigurableApplicationContext context =
         new ClassPathXmlApplicationContext("applicationContext.xml");
 ```
 
-### Shutting down the Spring IoC container
+## Shutting down the Spring IoC container
 
 SpringのIoC Containerを使ったアプリケーションを終了する場合は、IoC Containerを停止する必要があります。
 
@@ -202,7 +198,7 @@ context.registerShutdownHook(); // ★ JVMのシャットダウンフックに�
 // ...
 ```
 
-### Using the container
+## Using the container
 
 SpringのIoC Containerに登録したBeanを使う場合は、`ApplicationContext`インタフェースの`T getBean(String, Class<T>)`メソッドを使用します。
 
@@ -218,5 +214,3 @@ context.registerShutdownHook();
 TestBean testBean = context.getBean("testBean", TestBean.class); // ★ Beanの取得
 testBean.print(); // ★ 取得したBeanの呼び出し
 ```
-
-## Bean overview
