@@ -6,9 +6,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import static org.hamcrest.core.Is.*;
-import static org.hamcrest.core.IsNot.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNot.not;
+import static org.junit.Assert.assertThat;
 
 public class ScopeTest {
 
@@ -19,10 +19,10 @@ public class ScopeTest {
         context.registerShutdownHook();
 
         Object singletonBean = context.getBean("testBean");
-        assertThat(singletonBean,is(context.getBean("testBean")));
+        assertThat(singletonBean, is(context.getBean("testBean")));
 
         Object prototypeBean = context.getBean("prototypeTestBean");
-        assertThat(prototypeBean,not(context.getBean("prototypeTestBean")));
+        assertThat(prototypeBean, not(context.getBean("prototypeTestBean")));
 
     }
 
@@ -33,10 +33,10 @@ public class ScopeTest {
         context.registerShutdownHook();
 
         Object singletonBean = context.getBean("testBean");
-        assertThat(singletonBean,is(context.getBean("testBean")));
+        assertThat(singletonBean, is(context.getBean("testBean")));
 
         Object prototypeBean = context.getBean("prototypeTestBean");
-        assertThat(prototypeBean,not(context.getBean("prototypeTestBean")));
+        assertThat(prototypeBean, not(context.getBean("prototypeTestBean")));
     }
 
     @Test
@@ -46,23 +46,23 @@ public class ScopeTest {
         context.registerShutdownHook();
 
         Object singletonBean = context.getBean("testBean");
-        assertThat(singletonBean,is(context.getBean("testBean")));
+        assertThat(singletonBean, is(context.getBean("testBean")));
 
         Object prototypeBean = context.getBean("prototypeTestBean");
-        assertThat(prototypeBean,not(context.getBean("prototypeTestBean")));
+        assertThat(prototypeBean, not(context.getBean("prototypeTestBean")));
     }
 
     @Configuration
     static class Config {
 
         @Bean
-        TestBean testBean(){
+        TestBean testBean() {
             return new TestBean();
         }
 
         @Bean
         @Scope(BeanDefinition.SCOPE_PROTOTYPE)
-        TestBean prototypeTestBean(){
+        TestBean prototypeTestBean() {
             return new TestBean();
         }
 
@@ -71,6 +71,11 @@ public class ScopeTest {
     @Configuration
     @ComponentScan(excludeFilters = @ComponentScan.Filter(Configuration.class))
     static class ConfigWithComponentScan {
+
+        @Bean
+        ChildBean childBean() {
+            return new ChildBean();
+        }
 
     }
 

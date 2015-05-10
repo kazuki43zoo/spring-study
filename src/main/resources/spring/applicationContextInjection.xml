@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="constructorParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean">
+        <constructor-arg ref="childBean"/>
+    </bean>
+
+    <bean id="setterParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean">
+        <property name="childBean" ref="childBean"/>
+    </bean>
+
+    <context:component-scan base-package="com.github.kazuki43zoo.container">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.context.annotation.Configuration"/>
+    </context:component-scan>
+
+    <bean id="parentMultiBean"
+          class="com.github.kazuki43zoo.container.ParentMultiBean">
+        <constructor-arg ref="childBean2"/>
+        <constructor-arg ref="childBean"/>
+    </bean>
+
+    <bean id="setterParentMultiBean"
+          class="com.github.kazuki43zoo.container.ParentMultiBean">
+        <property name="childBean" ref="childBean"/>
+        <property name="childBean2" ref="childBean2"/>
+    </bean>
+
+    <bean id="childBean" class="com.github.kazuki43zoo.container.ChildBean"/>
+    <bean id="childBean2" class="com.github.kazuki43zoo.container.ChildBean2"/>
+
+
+    <bean id="configBean" class="com.github.kazuki43zoo.container.ConfigBean">
+        <property name="string" value="String Value"/>
+        <property name="integer" value="2015"/>
+        <property name="properties">
+            <value>
+                prop1=value1
+                prop2=value2
+            </value>
+        </property>
+    </bean>
+
+    <bean id="idRefConfigBean"
+          class="com.github.kazuki43zoo.container.ConfigBean">
+        <property name="string">
+            <idref bean="childBean"/>
+        </property>
+    </bean>
+
+    <bean id="innerParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean">
+        <constructor-arg>
+            <bean class="com.github.kazuki43zoo.container.ChildBean"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="testBean" class="com.github.kazuki43zoo.container.TestBean"/>
+
+    <bean id="collectionsBean"
+          class="com.github.kazuki43zoo.container.CollectionsBean">
+        <property name="list">
+            <list>
+                <ref bean="testBean"/>
+                <bean class="com.github.kazuki43zoo.container.TestBean"/>
+            </list>
+        </property>
+        <property name="map">
+            <map>
+                <entry key="key1" value-ref="testBean"/>
+                <entry key="key2">
+                    <bean class="com.github.kazuki43zoo.container.TestBean"/>
+                </entry>
+            </map>
+        </property>
+        <property name="set">
+            <set>
+                <value>String1</value>
+                <value>String2</value>
+            </set>
+        </property>
+        <property name="properties">
+            <props>
+                <prop key="prop1">Value1</prop>
+                <prop key="prop2">Value2</prop>
+            </props>
+        </property>
+    </bean>
+
+
+    <bean id="utilCollectionsBean"
+          class="com.github.kazuki43zoo.container.CollectionsBean">
+        <property name="list" ref="list"/>
+        <property name="map" ref="map"/>
+        <property name="set" ref="set"/>
+        <property name="properties" ref="properties"/>
+    </bean>
+
+    <util:list id="list">
+        <ref bean="testBean"/>
+        <bean class="com.github.kazuki43zoo.container.TestBean"/>
+    </util:list>
+
+    <util:map id="map">
+        <entry key="key1" value-ref="testBean"/>
+        <entry key="key2">
+            <bean class="com.github.kazuki43zoo.container.TestBean"/>
+        </entry>
+    </util:map>
+
+    <util:set id="set">
+        <value>String1</value>
+        <value>String2</value>
+    </util:set>
+
+    <util:properties id="properties">
+        <prop key="prop1">Value1</prop>
+        <prop key="prop2">Value2</prop>
+    </util:properties>
+
+    <bean id="abstractCollectionsBean" abstract="true"
+          class="com.github.kazuki43zoo.container.CollectionsBean">
+        <property name="properties">
+            <props>
+                <prop key="prop1">Parent Value1</prop>
+                <prop key="prop2">Parent Value2</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="extendCollectionsBean" parent="abstractCollectionsBean">
+        <property name="properties">
+            <props merge="true">
+                <prop key="prop2">Child Value2</prop>
+                <prop key="prop3">Child Value3</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean class="com.github.kazuki43zoo.container.ParentMultiBean">
+        <constructor-arg ref="childBean"/>
+        <constructor-arg>
+            <null/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="hierarchy1Bean"
+          class="com.github.kazuki43zoo.container.Hierarchy1Bean">
+        <property name="hierarchy2Bean.hierarchy3Bean.string"
+                  value="Nested Bean Value"/>
+    </bean>
+
+</beans>

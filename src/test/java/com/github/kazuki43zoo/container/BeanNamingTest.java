@@ -69,6 +69,10 @@ public class BeanNamingTest {
     @Configuration
     @ComponentScan(excludeFilters = @ComponentScan.Filter(Configuration.class))
     static class ComponentScanConfig {
+        @Bean
+        ChildBean childBean() {
+            return new ChildBean();
+        }
     }
 
     @Configuration
@@ -77,6 +81,10 @@ public class BeanNamingTest {
             nameGenerator = TrimmingImplAnnotationBeanNameGenerator.class
     )
     static class ComponentScanConfigWithBeanNameGenerator {
+        @Bean
+        ChildBean childBean() {
+            return new ChildBean();
+        }
     }
 
 }
