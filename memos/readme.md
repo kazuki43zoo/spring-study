@@ -7,8 +7,10 @@ Springの[リファレンスページ](http://docs.spring.io/spring/docs/current
 
 * [The IoC Container](ioc-container/readme.md)
     * [IoC Container overview](ioc-container/01.container-overview.md)
-    * [Bean overview](ioc-container/02.bean-overview.md)
+    * [Bean basic](ioc-container/02.bean-basic.md)
     * [Dependency Injection](ioc-container/03.dependency-injection.md)
 
 * [Appendix](appendix/readme.md)
     * [Method Injection](appendix/method-injection.md)
+    * [XML shortcut for Dependency Injection](appendix/injection-shortcut-namespace.md)
+    * [Custom Scope](appendix/custom-scope.md)
