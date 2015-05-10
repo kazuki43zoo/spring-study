@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config />
+
+    <bean id="annotatedCollectionsBean"
+          class="com.github.kazuki43zoo.container.AnnotatedCollectionsBean"/>
+
+    <util:list id="list">
+        <bean class="com.github.kazuki43zoo.container.TestBean"/>
+    </util:list>
+
+    <util:map id="map">
+        <entry key="key1">
+            <bean class="com.github.kazuki43zoo.container.TestBean"/>
+        </entry>
+    </util:map>
+
+    <util:set id="set">
+        <value>String1</value>
+        <value>String2</value>
+    </util:set>
+
+    <util:properties id="properties">
+        <prop key="prop1">Value1</prop>
+        <prop key="prop2">Value2</prop>
+    </util:properties>
+
+</beans>

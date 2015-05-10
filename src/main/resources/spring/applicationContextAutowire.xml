@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean id="childBean" class="com.github.kazuki43zoo.container.ChildBean"
+          primary="true"/>
+    <bean id="childBean2" class="com.github.kazuki43zoo.container.ChildBean"/>
+    <bean id="childBean3" class="com.github.kazuki43zoo.container.ChildBean"
+          autowire-candidate="false"/>
+
+
+    <bean id="parentBean" class="com.github.kazuki43zoo.container.ParentBean"/>
+    <bean id="noAutowireNameParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean" autowire="no"/>
+    <bean id="autowireDefaultParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean"
+          autowire="default"/>
+    <bean id="autowireByNameParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean"
+          autowire="byName"/>
+    <bean id="autowireByTypeParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean"
+          autowire="byType"/>
+    <bean id="autowireConstructorParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean"
+          autowire="constructor"/>
+    <bean id="overrideAutowireParentBean"
+          class="com.github.kazuki43zoo.container.ParentBean"
+          autowire="constructor">
+        <constructor-arg name="childBean">
+            <bean class="com.github.kazuki43zoo.container.ChildBean"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="collectionsBean2" class="com.github.kazuki43zoo.container.CollectionsBean2" autowire="byType"/>
+
+    <bean id="collectionsBean"
+          class="com.github.kazuki43zoo.container.CollectionsBean" autowire="byName"/>
+
+    <util:list id="list">
+        <bean class="com.github.kazuki43zoo.container.TestBean"/>
+    </util:list>
+
+    <util:map id="map">
+        <entry key="key1">
+            <bean class="com.github.kazuki43zoo.container.TestBean"/>
+        </entry>
+    </util:map>
+
+    <util:set id="set">
+        <value>String1</value>
+        <value>String2</value>
+    </util:set>
+
+    <util:properties id="properties">
+        <prop key="prop1">Value1</prop>
+        <prop key="prop2">Value2</prop>
+    </util:properties>
+
+</beans>

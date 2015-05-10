@@ -25,4 +25,5 @@ public class ChildBean implements BeanNameAware {
     public void setBeanName(String beanName) {
         this.beanName = beanName;
     }
+
 }
