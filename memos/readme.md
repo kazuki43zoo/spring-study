@@ -1,4 +1,4 @@
-# Spring Study Memo
+# Spring Study Memo (Japanese Only)
 
 Springの[リファレンスページ](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/)を読んで勉強した際のメモです。
 リファレンスページをベースに構成していますが、必ずしも完全に一致しているわけではありません。
