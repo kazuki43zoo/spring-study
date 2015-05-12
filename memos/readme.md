@@ -1,7 +1,7 @@
 # Spring Study Memo (Japanese Only)
 
 Springの[リファレンスページ](http://docs.spring.io/spring/docs/current/spring-framework-reference/htmlsingle/)を読んで勉強した際のメモです。
-リファレンスページをベースに構成していますが、必ずしも完全に一致しているわけではありません。
+リファレンスページを構成を意識していますが、必ずしも一致しているわけではありません。
 
 なお、勉強時に参照したリファレンスのバージョンは、4.1.6.RELEASEです。
 
