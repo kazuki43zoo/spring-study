@@ -6,8 +6,8 @@ Springの[リファレンスページ](http://docs.spring.io/spring/docs/current
 なお、勉強時に参照したリファレンスのバージョンは、4.1.6.RELEASEです。
 
 * [The IoC Container](ioc-container/readme.md)
-    * [IoC Container overview](ioc-container/01.container-overview.md)
-    * [Bean basic](ioc-container/02.bean-basic.md)
+    * [SpringのIoCコンテナ](ioc-container/01.container.md)
+    * [Bean](ioc-container/02.bean.md)
     * [Dependency Injection](ioc-container/03.dependency-injection.md)
 
 * [Appendix](appendix/readme.md)
