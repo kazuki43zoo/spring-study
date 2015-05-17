@@ -7,7 +7,7 @@ Springの[リファレンスページ](http://docs.spring.io/spring/docs/current
 
 * [The IoC Container](ioc-container/readme.md)
     * [SpringのIoCコンテナ](ioc-container/01.container.md)
-    * [Bean](ioc-container/02.bean.md)
+    * [Bean定義](ioc-container/02.bean-definition.md)
     * [Dependency Injection](ioc-container/03.dependency-injection.md)
 
 * [Appendix](appendix/readme.md)
