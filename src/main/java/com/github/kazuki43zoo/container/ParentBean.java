@@ -5,11 +5,11 @@ public class ParentBean {
     private ChildBean childBean;
 
     public ParentBean() {
-        System.out.println(getClass());
+        System.out.println("default:" + getClass());
     }
 
     public ParentBean(ChildBean childBean) {
-        System.out.println(getClass());
+        System.out.println("ChildBean : " + getClass());
         this.childBean = childBean;
     }
 

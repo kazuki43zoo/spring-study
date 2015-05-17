@@ -1,19 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:util="http://www.springframework.org/schema/util"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-       "
-        default-autowire="constructor"
-        default-autowire-candidates="*Service,*Repository"
-        default-destroy-method="destroyMethod"
-        default-init-method="initMethod"
-        default-lazy-init="true"
-        default-merge="">
+        http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="constructor"
+       default-autowire-candidates="Bean,childBean"
+       default-destroy-method="destroy"
+       default-init-method="init"
+       default-lazy-init="true"
+       default-merge="true">
 
+    <bean id="parentBean" class="com.github.kazuki43zoo.container.ParentBean"/>
+    <bean id="childBean" class="com.github.kazuki43zoo.container.ChildBean"/>
+
+    <bean id="abstractCollectionsBean" abstract="true"
+          class="com.github.kazuki43zoo.container.CollectionsBean">
+        <property name="properties">
+            <props>
+                <prop key="prop1">Parent Value1</prop>
+                <prop key="prop2">Parent Value2</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="collectionsBean" parent="abstractCollectionsBean">
+        <property name="properties">
+            <props>
+                <prop key="prop2">Child Value2</prop>
+                <prop key="prop3">Child Value3</prop>
+            </props>
+        </property>
+    </bean>
 
 </beans>
