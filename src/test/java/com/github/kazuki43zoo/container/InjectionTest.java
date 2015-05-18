@@ -81,7 +81,7 @@ public class InjectionTest {
         ParentBean parentBean = context.getBean("parentBean", ParentBean.class);
         assertThat(parentBean.getChildBean(), is(parentContext.getBean("childBean")));
         assertThat(parentBean.getChildBean(), not(context.getBean("childBean")));
-        System.out.println(context.getBean("childBean", ChildBean.class).getMessage());
+        System.out.println(ChildBean.class.cast(context.getBean("childBean")).getMessage());
 
     }
 

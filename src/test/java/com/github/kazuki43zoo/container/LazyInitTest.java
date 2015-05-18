@@ -62,7 +62,7 @@ public class LazyInitTest {
 
 
     @Configuration
-    @ComponentScan
+    @ComponentScan(useDefaultFilters = false, includeFilters = @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, value = AnnotatedLazyBean.class))
     static class ComponentScanConfig {
     }
 

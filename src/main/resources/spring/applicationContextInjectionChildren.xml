@@ -11,6 +11,7 @@
         <property name="target">
             <ref parent="childBean"/>
         </property>
+        <property name="proxyTargetClass" value="true"/>
         <property name="interceptorNames">
             <list>
                 <value>debugInterceptor</value>
