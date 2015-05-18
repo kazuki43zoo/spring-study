@@ -5,7 +5,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Arrays;
 
 public class InstantiatingTest {
 
@@ -32,12 +35,20 @@ public class InstantiatingTest {
         context.getBean("testBeanCreatedByStaticMethod", TestBean.class);
         context.getBean("testBeanCreatedByInstanceMethod", TestBean.class);
         context.getBean("testBeanCreatedByFactoryBean", TestBean.class);
+        System.out.println(context.getBean("testBeanCreatedByFactoryBean", TestBean.class));
+        System.out.println(context.getBean("testBeanCreatedByFactoryBean", TestBean.class));
+        System.out.println(context.getBean("&testBeanCreatedByFactoryBean"));
+        System.out.println(context.getBean("testBeanNonSingletonFactoryBean", TestBean.class));
+        System.out.println(context.getBean("testBeanNonSingletonFactoryBean", TestBean.class));
+        System.out.println(context.getBean("&testBeanNonSingletonFactoryBean"));
+
+        System.out.println(Arrays.asList(context.getBeanDefinitionNames()));
     }
 
     @Configuration
     static class Config {
 
-        @Bean
+        @Bean(destroyMethod = "")
         TestBean testBean() {
             return new TestBean();
         }
@@ -62,6 +73,10 @@ public class InstantiatingTest {
             return new TestBeanFactoryBean();
         }
 
+        @Bean
+        TestBeanNonSingletonFactoryBean testBeanNonSingletonFactoryBean() {
+            return new TestBeanNonSingletonFactoryBean();
+        }
 
     }
 }
