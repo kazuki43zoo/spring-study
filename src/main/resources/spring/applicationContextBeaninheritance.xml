@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+       ">
+
+    <bean id="orderDataSource" class="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactoryBean">
+        <property name="databaseName" value="order"/>
+        <property name="databaseType" value="H2" />
+    </bean>
+
+    <bean id="accountDataSource" class="org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseFactoryBean">
+        <property name="databaseName" value="account"/>
+        <property name="databaseType" value="H2" />
+    </bean>
+
+    <bean id="abstractJdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate" abstract="true">
+        <property name="queryTimeout" value="100"/>
+        <property name="fetchSize" value="100" />
+    </bean>
+
+    <bean id="orderJdbcTemplate" parent="abstractJdbcTemplate">
+        <property name="dataSource" ref="orderDataSource" />
+    </bean>
+
+    <bean id="accountJdbcTemplate" parent="abstractJdbcTemplate">
+        <property name="dataSource" ref="accountDataSource" />
+    </bean>
+
+</beans>
