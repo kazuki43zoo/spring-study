@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="aopSampleService" class="com.github.kazuki43zoo.aop.domain.service.AopSampleService"/>
+
+    <bean id="traceLoggerAspect" class="com.github.kazuki43zoo.aop.XmlSchemaStyleTest$TraceLoggerAspect"/>
+
+    <aop:config>
+        <aop:pointcut id="globalAnyServiceMethod"
+                      expression="execution(* com.github.kazuki43zoo.aop.domain.service.*.*(..))"/>
+        <aop:aspect ref="traceLoggerAspect">
+            <aop:pointcut id="anyServiceMethod"
+                          expression="execution(* com.github.kazuki43zoo.aop.domain.service.*.*(..))"/>
+            <aop:before
+                    pointcut="execution(* com.github.kazuki43zoo.aop.domain.service.*.*(..))"
+                    method="loggingBegin"/>
+            <aop:after
+                    pointcut="execution(* com.github.kazuki43zoo.aop.domain.service.*.*(..))"
+                    method="loggingEnd"/>
+            <aop:before
+                    pointcut-ref="anyServiceMethod"
+                    method="loggingBegin"/>
+            <aop:after
+                    pointcut-ref="anyServiceMethod"
+                    method="loggingEnd"/>
+            <aop:before
+                    pointcut-ref="globalAnyServiceMethod"
+                    method="loggingBegin"/>
+            <aop:after
+                    pointcut-ref="globalAnyServiceMethod"
+                    method="loggingEnd"/>
+            <aop:before
+                    pointcut="com.github.kazuki43zoo.aop.domain.service.GlobalPointcuts.anyService()"
+                    method="loggingBegin"/>
+            <aop:after
+                    pointcut="com.github.kazuki43zoo.aop.domain.service.GlobalPointcuts.anyService()"
+                    method="loggingEnd"/>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
